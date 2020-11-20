@@ -56,14 +56,17 @@
             <exclude>**/*.svg</exclude>
             <exclude>Jenkinsfile</exclude>
             <exclude>**/.*</exclude>
-            <exclude>**/*.adoc</exclude>
             <exclude>**/*.woff</exclude>
             <exclude>**/*.ttf</exclude>
             <exclude>**/*.woff2</exclude>
             <exclude>**/*.eot</exclude>
             <exclude>package-json.lock</exclude>
             <exclude>.tmp/**</exclude>
+            <exclude>.vscode/**</exclude>
             <exclude>dist/**</exclude>
+            <exclude>.*</exclude>
+            <exclude>.*/**</exclude>
+            <exclude>**/*.adoc</exclude>
           </excludes>
         </configuration>
       </plugin>
