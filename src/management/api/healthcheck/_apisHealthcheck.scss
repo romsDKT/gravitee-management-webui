@@ -1,0 +1,71 @@
+.gv-apis-healthcheck_title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.gv-apis-healthcheck_control {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  margin: 20px 0 10px 0;
+
+  > * {
+    margin: 0 5px;
+  }
+}
+
+.gv-apis-healthcheck_current-status {
+  height: 60px;
+  width: 100%;
+  margin: 5px 0;
+
+  span {
+    font-size: large;
+    font-weight: bold;
+    color: white;
+  }
+}
+
+.gv-apis-healthcheck_list {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0.5rem;
+
+  md-card-title-text {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  md-card-title {
+    flex: initial;
+  }
+
+  md-card-content {
+    text-align: center;
+
+    .noData {
+      color: darkgray;
+      font-size: large;
+      font-weight: bold;
+      margin: 10px;
+      padding: 10px;
+    }
+  }
+
+  .apiDown {
+    ng-md-icon {
+      margin-left: 20px;
+      position: initial;
+      top: initial;
+    }
+  }
+}
+
+gv-chart-gauge {
+  height: 120px;
+}
