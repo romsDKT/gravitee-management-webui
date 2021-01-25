@@ -15,6 +15,7 @@
  */
 import * as _ from 'lodash';
 import AnalyticsService from '../../services/analytics.service';
+import EventsService from '../../services/events.service';
 
 const WidgetComponent: ng.IComponentOptions = {
   template: require('./widget.html'),
@@ -24,10 +25,11 @@ const WidgetComponent: ng.IComponentOptions = {
     globalQuery: '<',
     customTimeframe: '<'
   },
-  controller: function($scope, $state, AnalyticsService: AnalyticsService) {
+  controller: function($scope, $state, AnalyticsService: AnalyticsService, EventsService: EventsService) {
     'ngInject';
     this.$state = $state;
     this.AnalyticsService = AnalyticsService;
+    this.EventsService = EventsService;
 
     $scope.$on('gridster-resized', function () {
       $scope.$broadcast('onWidgetResize');
@@ -118,7 +120,11 @@ const WidgetComponent: ng.IComponentOptions = {
         .apply(this.widget.chart.service.caller, args)
         .then(response => {
           this.results = response.data;
-          if (this.widget.chart.percent) {
+          if (this.widget.chart.type === 'line' && this.$state.params.apiId) {
+            this.EventsService.search(['PUBLISH_API'], [this.$state.params.apiId], response.data.timestamp.from, response.data.timestamp.to, 0, 10).then(response => {
+              this.results.events = response.data;
+            }).finally(() => this.fetchData = false);
+          } else if (this.widget.chart.percent) {
             delete chartRequest.query;
             chartRequest.type = 'count';
             this.widget.chart.service.function
